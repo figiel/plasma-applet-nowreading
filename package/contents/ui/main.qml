@@ -22,7 +22,9 @@ ListView {
             width: parent.width
             height: parent.height
             Text {
-                text: model["DataEngineSource"]
+                text: model["DataEngineSource"].substr(
+                          model["DataEngineSource"].lastIndexOf('/')+1,
+                          model["DataEngineSource"].lastIndexOf('.') - model["DataEngineSource"].lastIndexOf('/') - 1).replace(/\./g, " ")
 //                height: 40
             }
             Row {
