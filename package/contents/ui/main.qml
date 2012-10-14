@@ -2,47 +2,64 @@ import QtQuick 1.1
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
 
-ListView {
-    PlasmaCore.DataSource {
-        id: nowReadingEngine
-        engine: "nowreading"
-        connectedSources: sources
-        interval: 500
-    }
-    model: PlasmaCore.DataModel {
-        dataSource: nowReadingEngine
+Item {
+    id: root
+    width: 400
+    height: 300
+    clip: true
 
-    }
-    delegate:
-        MouseArea {
-        onClicked: Qt.openUrlExternally("file://" + model["DataEngineSource"])
-        height: 40
+    ListView {
+        id: nowreadingList
         width: parent.width
-        Column{
+        height: parent.height
+
+        PlasmaCore.DataSource {
+            id: nowReadingEngine
+            engine: "nowreading"
+            connectedSources: sources
+            interval: 500
+        }
+        model: PlasmaCore.DataModel {
+            dataSource: nowReadingEngine
+        }
+        delegate: Item {
             width: parent.width
-            height: parent.height
-            Text {
-                text: model["DataEngineSource"].substr(
-                          model["DataEngineSource"].lastIndexOf('/')+1,
-                          model["DataEngineSource"].lastIndexOf('.') - model["DataEngineSource"].lastIndexOf('/') - 1).replace(/\./g, " ")
-//                height: 40
+            height: 40
+            MouseArea {
+                anchors.fill: parent
+                hoverEnabled: true
+                onClicked: Qt.openUrlExternally("file://" + model["DataEngineSource"])
             }
-            Row {
-                width: parent.width
-                height: 40
-                PlasmaComponents.ProgressBar {
-                    id: progBar
-                    minimumValue: 1
-                    maximumValue: model["totalPages"]
-                    value: model["currentPage"]
-                    width: parent.width - 40
-//                    height: 10
-                }
+            Column {
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.leftMargin: 5
                 Text {
-                    text: parseInt((model["currentPage"]/model["totalPages"])*100)+"%"
+                    text: model["DataEngineSource"].substr(
+                              model["DataEngineSource"].lastIndexOf('/')+1,
+                              model["DataEngineSource"].lastIndexOf('.') - model["DataEngineSource"].lastIndexOf('/') - 1).replace(/\./g, " ")
+                    width: parent.width
+                    elide: Text.ElideRight
+                }
+                Row {
+                    width: parent.width
+                    height: 40
+                    PlasmaComponents.ProgressBar {
+                        id: progBar
+                        minimumValue: 1
+                        maximumValue: model["totalPages"]
+                        value: model["currentPage"]
+                        width: parent.width - 40
+                    }
+                    Text {
+                        text: parseInt((model["currentPage"]/model["totalPages"])*100)+"%"
+                    }
                 }
             }
         }
     }
-}
 
+    Component.onCompleted: {
+        plasmoid.aspectRatioMode = IgnoreAspectRatio;
+    }
+}
