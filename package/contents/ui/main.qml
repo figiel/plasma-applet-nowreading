@@ -19,8 +19,12 @@ Item {
             connectedSources: sources
             interval: 500
         }
-        model: PlasmaCore.DataModel {
-            dataSource: nowReadingEngine
+        model: PlasmaCore.SortFilterModel {
+                  sortRole: "accessTime"
+                  sortOrder: "DescendingOrder"
+                  sourceModel: PlasmaCore.DataModel {
+                     dataSource: nowReadingEngine
+                  }
         }
         delegate: Item {
             width: parent.width
