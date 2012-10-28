@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Plasma-applet-nowreading by figiel</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Plasma-applet-nowreading</h1>
+        <p>Okular recent documents view. To be used with plasma-engine-nowreading.</p>
+
+        <p class="view"><a href="https://github.com/figiel/plasma-applet-nowreading">View the Project on GitHub <small>figiel/plasma-applet-nowreading</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/figiel/plasma-applet-nowreading/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/figiel/plasma-applet-nowreading/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/figiel/plasma-applet-nowreading">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>Now Reading Applet</h1>
+
+<p>A plasma applet showing recently open documents from Okular with progress bar.</p>
+
+<h2>Installation</h2>
+
+<p>Build dependencies:</p>
+
+<pre><code>sudo apt-get build-dep kde-workspace
+sudo apt-get install libpoppler-qt4-dev
+</code></pre>
+
+<p>Clone needed repositories:</p>
+
+<pre><code>git clone git://github.com/figiel/plasma-engine-nowreading.git
+git clone git://github.com/figiel/plasma-applet-nowreading.git
+</code></pre>
+
+<p>Build and install to /usr/local:</p>
+
+<pre><code>mkdir plasma-{engine,applet}-nowreading/build
+cd plasma-engine-nowreading/build
+cmake ../
+make
+sudo make install
+cd ../../plasma-applet-nowreading/build
+cmake ../
+make
+sudo make install
+</code></pre>
+
+<p>Adjust KDEDIRS to include /usr/local, e.g. by doing this:</p>
+
+<pre><code>echo -en '#!/bin/bash\nexport KDEDIRS=/usr/local\n' &gt; ~/.kde/env/plasmoids.sh
+chmod a+x ~/.kde/env/plasmoids.sh
+</code></pre>
+
+<h2>Limitations</h2>
+
+<p>At the moment only PDF documents are shown.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/figiel">figiel</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
